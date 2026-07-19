@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rising Waters — Flood Risk Prediction</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="brand" href="{{ url_for('home') }}">
+      <span class="mark">RW</span> Rising Waters
+    </a>
+    <div class="nav-links">
+      <a href="{{ url_for('home') }}">Overview</a>
+      <a href="{{ url_for('predict_form') }}">Predict</a>
+    </div>
+  </nav>
+
+  <div class="page">
+    <section class="hero">
+      <div class="eyebrow">Station status &mdash; live model v1.0 &mdash; XGBoost</div>
+      <h1 class="display">Know the flood risk<br><span class="accent">before the water rises.</span></h1>
+      <p class="lede">
+        Rising Waters reads rainfall, humidity, temperature and visibility like a
+        station instrument panel, then turns those readings into a flood-risk
+        call in under a second &mdash; powered by a machine learning model trained
+        on historical weather patterns.
+      </p>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;">
+        <a href="{{ url_for('predict_form') }}" class="btn btn-primary">Run a prediction →</a>
+        <a href="#how-it-works" class="btn btn-ghost">How it works</a>
+      </div>
+
+      <svg class="wave-divider" viewBox="0 0 1200 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,45 C150,90 350,0 600,40 C850,80 1050,10 1200,50 L1200,90 L0,90 Z" fill="url(#waveGrad)" opacity="0.5"/>
+        <path d="M0,60 C180,20 380,80 620,45 C860,10 1020,70 1200,35 L1200,90 L0,90 Z" fill="url(#waveGrad2)" opacity="0.7"/>
+        <defs>
+          <linearGradient id="waveGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#4FB8D9"/>
+            <stop offset="100%" stop-color="#4FAE8A"/>
+          </linearGradient>
+          <linearGradient id="waveGrad2" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#2C7C93"/>
+            <stop offset="100%" stop-color="#1B384A"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </section>
+
+    <section id="how-it-works" class="strip">
+      <div class="cell">
+        <div class="num">01 / READ</div>
+        <h4>Weather intake</h4>
+        <p>Annual &amp; seasonal rainfall, cloud visibility, temperature and humidity are collected as the model's input features.</p>
+      </div>
+      <div class="cell">
+        <div class="num">02 / SCALE</div>
+        <h4>Standardize</h4>
+        <p>Inputs are transformed with the same fitted StandardScaler used during training, so readings stay consistent.</p>
+      </div>
+      <div class="cell">
+        <div class="num">03 / PREDICT</div>
+        <h4>XGBoost model</h4>
+        <p>A gradient-boosted classifier, selected after comparison against Decision Tree, Random Forest and KNN, scores the risk.</p>
+      </div>
+      <div class="cell">
+        <div class="num">04 / ACT</div>
+        <h4>Clear call</h4>
+        <p>You're routed to a flood-risk or all-clear readout, with practical next steps either way.</p>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <span>Rising Waters &mdash; ML-based flood risk prediction</span>
+    <span class="station-code">MODEL: XGBOOST · SOURCE: WEATHER STATION SIM</span>
+  </footer>
+
+</body>
+</html>
